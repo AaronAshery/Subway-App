@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Reading Local and Express stops</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class=" col-6" src="/static/images/circle.png">
+                    <div class="col-6" style="background-color:black;">
+                        <p class="description" style="color:white">The diagram on the left is a merged snapshot of a the A and C train path.</p> <hr class="lineThin">
+                        <p class="description" style="color:white"> Trains that run on the same line will be illustrated this way on the subway map even though they do not stop at the same stops.</p> <hr class="lineThin">
+                        <p class="description" style="color:white">The black and white circles are used to show which trains stop at which station.</p>
+
+                        <ul>
+                            <li class="description" style="color:white"><b>White Dot:</b> both local and express trains stop there</li>
+                            <li class="description" style="color:white"><b>Black Dot:</b> only local trains stop</li>
+                        </ul>
+                        <br>
+   
+                    </div> 
+                </div> <br><br><br>
+            </div> <br><br><br><br>
+            <button onclick="location.href='/line'"class="learnlearn nextPosition circle" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/express'"class="learnlearn backPosition circle" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

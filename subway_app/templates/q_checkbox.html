@@ -1,0 +1,137 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+  let question = {{question|tojson}}
+  let choices = question.choices
+  var done = 0;
+  let incorrect_once = false;
+  let answers = Object.values(question['answer'])
+  let num_of_correct = answers.length
+
+      let answer_points = function (count) {
+    $.ajax({
+      type: "POST",
+      url: "/update_score",
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(count),
+      success: function (result) {
+        console.log(result);
+      },
+      error: function (request, status, error) {
+        console.log("Error");
+        console.log(request);
+        console.log(status);
+        console.log(error);
+      },
+    });
+  };
+
+  function buttonLogic(done){
+    // submit is visible until question correct
+        if(done < num_of_correct){
+            $(".next_button").hide()
+            $(".next_button").attr('disabled', true)
+        }
+  }
+  function submitClicked(){
+    done = 0;
+    // give answer feedback
+    let user_answer = [];
+    $('input[name="choice"]:checked').each(function() {
+          user_answer.push(this.value);
+      });
+
+      $.each(user_answer, function(index, user_input){
+        if(answers.includes(user_input)){
+          let findString =  '#' + (user_input.replace(/ /g, "")).replace(/\./g,"")
+          console.log(findString)
+          $(findString).addClass("correct-multiple_c")
+          done += 1
+        }else{
+          let findString =  '#' + (user_input.replace(/ /g, "")).replace(/\./g,"")
+          console.log(findString)
+          $(findString).addClass("wrong-multiple_c")
+          incorrect_once = true;
+          done -= 1;
+        }
+      })
+  }
+
+  function hideSubmit(done){
+      if(done == num_of_correct){
+        $(".submit").hide()
+        $(".submit").attr('disabled', true)
+        $(".next_button").show()
+        $(".next_button").attr('disabled', false)
+      }
+  }
+
+  $(document).ready(function() {
+    done = 0
+      buttonLogic(done)
+        // when submit is clicked give feedback and button should change
+        $('.submit').click(function (){
+            submitClicked()
+            hideSubmit(done)
+        })
+        // when the user is moving on to the next question take away a point if they got the question wrong
+        $('#nxt_button').click(function (){
+          if(incorrect_once == true){
+            answer_points("-1")
+          }
+        })
+
+    $('.checkbox-area').empty()
+    $.each(choices, function(index, value){
+        let choicediv = $('<div class="oneChoice">')
+        let inputString = '<input name="choice" class="mult-ans" type="checkbox"' + 'id="check' + index + '" '+ 'value="' + choices[index] + '">'
+        let input = $(inputString)
+        let labelString = '<label class="description_ans"' + 'id="' + (choices[index].replace(/ /g, "")).replace(/\./g,"") + '">'
+        let label = $(labelString).text(choices[index])
+        choicediv.append(input, label)
+        $('.checkbox-area').append(choicediv)
+    })
+  	})
+</script>
+
+<div class="container q_content">
+  <div class="row slide_view">
+    <div class="col-10 q_and_a">
+      <div class="row question_text">
+        <p class="description">{{question.question}}</p>
+      </div>
+      <div class="row">
+        <div class="checkbox-area">
+          <input
+            name="choice"
+            class="mult-ans"
+            type="radio"
+            id="m1"
+            value="{{question.choices[0]}}"
+          />
+          <label class="description_ans" for="m1"
+            >{{ question.choices[0]}}</label
+          >
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-6 q_and_a">
+      <img class="map_image" src="/static/images/{{question.img}}" />
+    </div> -->
+  </div>
+  <div class="row button_area">
+    <button class="submit learnlearn">submit</button>
+    <button
+      onclick="location.href='/quiz/{{question.next}}'"
+      class="learnlearn next_button"
+      role="button"
+      id="nxt_button"
+    >
+      Next &nbsp
+      <i class="fa-solid fa-arrow-right-long"></i>
+    </button>
+  </div>
+  <hr class="bottom_line" />
+</div>
+
+{% endblock %}

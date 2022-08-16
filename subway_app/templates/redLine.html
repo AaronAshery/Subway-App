@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Red Line</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class=" col-6" src="/static/images/redLine.png">
+                    <div class="col-6" style="background-color:black;">
+                        <!-- <p class="description">The <b>Red Line</b> & is made up of the <b>1, 2, 3</b> trains</p>    -->
+                        <!-- <img class="train" src="/static/images/redTrain.png"> -->
+                            <p class="description" style="color:white"><b>Popular Destinations</b></p> <hr class="lineThin"> 
+                            <li class="description" style="color:white">Columbia University</li>
+                            <li class="description" style="color:white">Columbus Circle</li>
+                            <li class="description" style="color:white">Time Square</li>
+                            <li class="description" style="color:white">Penn Station</li>
+                            <li class="description" style="color:white">Wall Street</li> 
+                            <p class="description" style="color:white"><b>Starting Route</b></p> <hr class="lineThin"> 
+                            <li class="description" style="color:white">2 and 3 trains start in <b>Lenox avenue</b> </li>
+                            <li class="description" style="color:white">1 train starts on <b>Broadway</b> </li>
+                            <p class="description" style="color:white"><b>Route Changes</b></p> <hr class="lineThin" style="color: white,!important;"> 
+                            <li class="description" style="color:white"> 1, 2, 3 trains are joined on <b>103rd</b> until their split in <b>Chambers Street</b></li>
+                            <li class="description" style="color:white">1, 2, 3 trains start running on <b>7 avenue</b> after <b>50th street</b></li>
+                                      
+                    </div> 
+                </div> <br><br><br>
+            </div> <br>
+            <button onclick="location.href='/orangeLine'"class="learnlearn nextPosition redLine" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/line'"class="learnlearn backPosition redLine" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr class="hrthick"><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "layout.html" %} {% block content %}
+
+<head>
+    <script src="https://kit.fontawesome.com/723fc66dde.js" crossorigin="anonymous"></script>
+</head>
+<script>
+
+options = [
+    "Manhattan",
+    "Brooklyn",
+    "Staten Island",
+    "Bronx",
+    "Queens"
+]
+
+correct = [
+
+]
+
+wrong = false
+
+function check(correct){
+    
+    if (correct.length != 5){
+        $(".q2_button").hide()
+        $(".q2_button").attr('disabled', true)
+        
+    } else{
+        $(".q2_button").show()
+        $(".q2_button").attr('disabled',false)
+        if (wrong == true){
+            let count = "-1"
+            alert(count)
+            $.ajax({
+                type:"POST",
+                url: "/update_score",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(count),
+                success: function (result) {
+                    alert(result)
+                },
+                error: function (request, status, error) {
+                    console.log("Error");
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
+                }
+            })
+        }
+    }
+}
+
+function make(options){
+    
+    let choices2 = $("#choices")
+    choices2.empty()
+    $.each(options, function (index, value){
+        
+        index = index + 1
+        let s = value + '<br>'
+        $("#choices").append("<div class='box' data-name=" + value + " data-index=" + index + ">" + s + "</div>")
+    })
+    $(".box").hover(function (){
+            this.id = "hovered"
+            $(this).draggable({
+                revert: "invalid",
+            })
+    },
+    function (){
+        this.id = ""
+    })
+
+    $("#d1").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Manhattan"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    $(ui.draggable).addClass('done')
+                    $(ui.draggable).removeClass('box')
+                    $(ui.draggable).removeClass('red')
+                    $(ui.draggable).draggable('disable')
+                    $(".done").hover(function (){
+                        this.id = ""
+                    })
+                    check(correct)
+                } else{
+                    $(ui.draggable).addClass('red')
+                    wrong = true
+                }
+            }
+        }
+    )
+    $("#d2").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Brooklyn"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    $(ui.draggable).addClass('done')
+                    $(ui.draggable).removeClass('box')
+                    $(ui.draggable).removeClass('red')
+                    $(ui.draggable).draggable('disable')
+                    $(".done").hover(function (){
+                        this.id = ""
+                    })
+                    check(correct)
+                } else{
+                    $(ui.draggable).addClass('red')
+                    wrong = true
+                }
+            }
+        }
+    )
+    $("#d3").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Staten"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    $(ui.draggable).addClass('done')
+                    $(ui.draggable).removeClass('box')
+                    $(ui.draggable).removeClass('red')
+                    $(ui.draggable).draggable('disable')
+                    $(".done").hover(function (){
+                        this.id = ""
+                    })
+                    check(correct)
+                } else{
+                    $(ui.draggable).addClass('red')
+                    wrong = true
+                }
+            }
+        }
+    )    
+    $("#d4").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Bronx"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    $(ui.draggable).addClass('done')
+                    $(ui.draggable).removeClass('box')
+                    $(ui.draggable).removeClass('red')
+                    $(ui.draggable).draggable('disable')
+                    $(".done").hover(function (){
+                        this.id = ""
+                    })
+                } else{
+                    $(ui.draggable).addClass('red')
+                    wrong = true
+                }
+            }
+            
+        }
+    )   
+    $("#d5").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Queens"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    $(ui.draggable).addClass('done')
+                    $(ui.draggable).removeClass('box')
+                    $(ui.draggable).removeClass('red')
+                    $(ui.draggable).draggable('disable')
+                    $(".done").hover(function (){
+                        this.id = ""
+                    })
+                    check(correct)
+                    
+                } else{
+                    $(ui.draggable).addClass('red')
+                    wrong = true
+                }
+            }
+            
+        }
+    )
+
+}
+
+$(document).ready(function (){
+   
+    make(options)
+    check(correct)
+})
+
+</script>
+ 
+
+
+<div class="container rel">
+    <div class="row">
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="description"> Drag the bouroughs to the correct location on the map</p>
+                        <div id=choices>
+                            
+                        </div>
+                    </div>
+                    <img class="map col-6 back" src="/static/images/unlabeled.jpg">
+                    <div>
+                    <i id="d1" class="fa-solid fa-location-dot dot1"></i>
+                    <i id="d2" class="fa-solid fa-location-dot dot2"></i>
+                    <i id="d3" class="fa-solid fa-location-dot dot3"></i>
+                    <i id="d4" class="fa-solid fa-location-dot dot4"></i>
+                    <i id="d5" class="fa-solid fa-location-dot dot5"></i>
+                    
+                </div> </div> 
+                <br><br>
+            </div> <br> <br> <br> 
+            <button onclick="location.href='/quiz/2'"class="learnlearn nextQPosition q2_button" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>   
+       </div>
+    </div>
+</div> 
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="/static/images/railway.png" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+
+    <!-- jquery -->
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://use.fontawesome.com/aacb0db459.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7fe6fbe8da.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='layout.js')}}"
+    ></script>
+
+    <title>Subway Learn</title>
+  </head>
+  <body>
+    {{title}}
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="color container">
+          <!-- <a class="text navbar-brand" href="/">Pika</a> -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <div>
+                <img class="smallImage" src="/static/images/railway.png" />
+              </div>
+              <a class="menuText1 nav-link" href="/">Home</a>
+              <a class="menuText2 nav-link" href="/learn">Learn</a>
+              <a class="menuText3 nav-link" href="/quiz_home">Test</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>

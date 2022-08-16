@@ -1,0 +1,133 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+    let question = {{question|tojson}}
+    let choices = question.choices
+    var done = false;
+    let incorrect_once = false;
+
+    let answer_points = function (count) {
+    $.ajax({
+      type: "POST",
+      url: "/update_score",
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(count),
+      success: function (result) {
+        console.log(result);
+      },
+      error: function (request, status, error) {
+        console.log("Error");
+        console.log(request);
+        console.log(status);
+        console.log(error);
+      },
+    });
+  };
+
+  function buttonLogic(done){
+    // submit is visible until question correct
+        if(done == false){
+            $(".next_button").hide()
+            $(".next_button").attr('disabled', true)
+        }
+  }
+  function submitClicked(){
+    // give answer feedback
+    let answer1 = $('#d1 :selected').text()
+        let answer2 = $('#d2 :selected').text()
+        console.log(answer1 + " " + answer2)
+        // check to see if that is the correct answer
+        if(answer1 != question.answer['1']){
+             $('#d1').addClass("wrong-answer")
+              incorrect_once = true;
+        }else{
+            $('#d1').removeClass("wrong-answer")
+            $('#d1').addClass("right-answer")
+        }
+        if(answer2 != question.answer['2']){
+            $('#d2').addClass("wrong-answer")
+             incorrect_once = true;
+        }else{
+            $('#d2').removeClass("wrong-answer")
+             $('#d2').addClass("right-answer")
+        }
+        if(answer1 == question.answer['1'] && answer2 == question.answer['2']){
+            done = true;
+            hideSubmit(done)
+        }
+  }
+
+  function hideSubmit(done){
+      if(done == true){
+          console.log(done)
+        $(".submit").hide()
+        $(".submit").attr('disabled', true)
+        $(".next_button").show()
+        $(".next_button").attr('disabled', false)
+      }
+  }
+
+    $(document).ready(function() {
+        buttonLogic(done)
+        // when submit is clicked give feedback and button should change
+        $('.submit').click(function (){
+            submitClicked()
+            buttonLogic(done)
+            hideSubmit(done)
+        })
+        // when the user is moving on to the next question take away a point if they got the question wrong
+        $('#nxt_button').click(function (){
+          if(incorrect_once == true){
+            answer_points("-1")
+          }
+        })
+        // dropdown
+        var dropdown = $('.choices');
+        $.each(choices, function(val, text) {
+        dropdown.append(
+            $('<option></option>').val(val).html(text)
+            );
+            });
+    	})
+</script>
+
+<div class="container q_content">
+  <div class="row slide_view">
+    <div class="col-6 q_on_dropdown">
+      <div class="row question_text">
+        <p class="description">{{question.question[0]}}</p>
+      </div>
+      <div class="row dropdown">
+        <select id="d1" class="choices">
+          <option></option>
+          <!-- dropdown -->
+        </select>
+      </div>
+      <div class="row question_text">
+        <p class="description">{{question.question[1]}}</p>
+      </div>
+      <div class="row dropdown">
+        <select id="d2" class="choices">
+          <option></option>
+          <!-- dropdown -->
+        </select>
+      </div>
+    </div>
+    <div class="col-6" id="testing">
+      <img class="map_image" src="/static/images/{{question.img}}" />
+    </div>
+  </div>
+  <div class="row button_area">
+    <button class="learnlearn submit">submit</button>
+    <button
+      onclick="location.href='/quiz/{{question.next}}'"
+      class="learnlearn next_button"
+      role="button"
+      id="nxt_button"
+    >
+      Next &nbsp <i class="fa-solid fa-arrow-right-long"></i>
+    </button>
+  </div>
+  <hr class="bottom_line" />
+</div>
+{% endblock %}

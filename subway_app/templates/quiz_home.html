@@ -1,0 +1,70 @@
+{% extends "layout.html" %} {% block content %}
+
+<script>
+    let user = {{user|tojson}}
+  let user_info = function () {
+    $.ajax({
+      type: "POST",
+      url: "/user_info",
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ test_started: "true" }),
+      success: function (result) {
+        console.log(result);
+      },
+      error: function (request, status, error) {
+        console.log("Error");
+        console.log(request);
+        console.log(status);
+        console.log(error);
+      },
+    });
+  };
+  $(document).ready(function () {
+    // when begin button is clicked
+    $("#begin_test").click(function () {
+      user_info();
+    });
+  });
+</script>
+
+<div class="form"></div>
+<div id="items" class="form2">
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col center">
+        <img class="quote" src="/static/images/main.png" />
+        <!-- change image to be for quiz-->
+        <button
+          onclick="location.href='/quiz/1'"
+          class="learnlearn learnlearnPosition"
+          id="begin_test"
+          role="button"
+        >
+          Begin &nbsp <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <div class="container">
+      <div class="row">
+        <!-- <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Bouroughs </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "red button-53" role="button"> StreetSystem </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "yellow button-53" role="button"> Local/Express </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "green button-53" role="button"> Line</button></div>
+                        </div>-->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col topRated center">
+        <!-- <img class="topRated" src="/static/images/topRated.png"> -->
+      </div>
+    </div>
+    <br /><br />
+
+    {% endblock %}
+  </div>
+</div>

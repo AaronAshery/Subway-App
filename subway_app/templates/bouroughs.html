@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Boroughs</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class=" col-7" src="/static/images/map.png">
+                    <div class="col-5" style="background-color:black;">
+                        <p class="description" style="color:white">New York is divided into five boroughs with <b>Manhattan</b> being the central area where the majority of tourist attractions reside</p>   
+                        <ul>    
+                            <li class="description man" style="color:white">Manhattan</li>
+                            <li class="description queens" style="color:white">Queens</li>
+                            <li class="description bronx" style="color:white">Bronx</li>
+                            <li class="staten description" style="color:white">Staten Island</li>
+                            <li class="description brooklyn" style="color:white">Brooklyn</li>
+                        </ul><br> <br>
+                    </div> 
+                </div> <br><br><br>
+            </div> <br>
+            <button onclick="location.href='/street'"class="learnlearn nextPosition" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/learn'"class="learnlearn backPosition" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

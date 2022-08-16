@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Express vs Local</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class="col-8" src="/static/images/express.png">
+                    <div class="col-4" style="background-color:black;">
+                        <p class="description" style="color:white"> This graphic is a partial snapshot of the Express A train path and the Local C train path</p>                        <hr class="lineThin">
+
+                        <ul class="">    
+                            <li class="description" style="color:white"><b>Express</b> trains skip certain stations for faster service.</li>
+                            <li class="description" style="color:white"><b>Local</b> trains stop at every station along their path.</li>                       
+                            <br> <hr class="lineThin">
+                            <li class="description" style="color:white">As illustrated in the graphic, multiple stations that service the C line service are skipped in the A line</li>
+                        </ul> 
+                        <br><br>
+                    </div> 
+                </div> <br><br> <br>
+            </div> <br> 
+            <button onclick="location.href='/circle'"class="learnlearn nextPosition express" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/downtown'"class="learnlearn backPosition express" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

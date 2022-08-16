@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+  let score = {{score|tojson}}
+  $(document).ready(function () {
+    $("#done_button").click(function () {
+      window.location.href = "/";
+    });
+  });
+</script>
+<div class="container q_content">
+  <div class="row slide_view finished_view">
+    <div class="col-4 result_img">
+      {% if score >= 4 %}
+      <img id="confetti" src="../static/images/confetti.png" />
+      {% else %}
+      <img id="thumbs" src="../static/images/thumbs_down.png" />
+      {% endif %}
+    </div>
+    <div class="col-4 score_text">You scored a {{score}}/6</div>
+    <div class="col-4 result_img">
+      {% if score >= 4 %}
+      <img id="confetti" src="../static/images/confetti.png" />
+      {% else %}
+      <img id="thumbs" src="../static/images/thumbs_down.png" />
+      {% endif %}
+    </div>
+  </div>
+  <div class="row bottom_area">
+    <button id="done_button" class="learnlearn">Done</button>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Manhattan Divison</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class="col-7" src="/static/images/downtown.png">
+                    <div class="col-5" style="background-color:black;">
+                        <p class="description" style="color:white"><b>Manhattan</b> can be divided into three areas:</p> 
+
+                        <ul>
+                            <li class="description" style="color:white"><b>Uptown</b> (anything north of 59th street)</li>
+                            <li class="description" style="color:white"><b>Midtown</b> (between 59th street and 14th street)</li>
+                            <li class="description" style="color:white"><b>Downtown</b> (anything south of 14th street)</li>
+                        </ul>
+                        <br>
+                        <hr class="lineThin">
+                        <ul class="right">    
+                            <li class="description right" style="color:white">The terms <b>uptown</b> and <b>downtown</b> are used to indicate which direction you’re traveling</li>
+                            <li class="description right"style="color:white">Manhattan is divided between the <b>east side</b> and <b>west side</b> with central park between them</li>
+                        </ul> 
+                        
+                                       
+                    </div> 
+                </div> <br><br><br>
+            </div> <br><br><br><br>
+            <button onclick="location.href='/express'"class="learnlearn nextPosition down1 downtown1" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/street'"class="learnlearn backPosition down1 downtown1" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

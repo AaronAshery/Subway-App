@@ -1,0 +1,116 @@
+{% extends "layout.html" %} {% block content %}
+
+<script>
+
+
+key = ["local", "express"]
+correct = true
+function check(answers){
+    let a = ""
+    let k = ""
+    let done = 0
+    $.each(answers, function(index,value){
+        a = answers[index].split(" ").join("")
+        a = a.toUpperCase()
+        k = key[index].split(" ").join("")
+        k = k.toUpperCase()
+        if (a != k){
+            correct = false
+            $("#"+key[index]).addClass("wrong-answer")
+        } else{
+            done += 1
+            $("#"+key[index]).removeClass("wrong-answer")
+            $("#"+key[index]).addClass("right-answer")
+        }
+    })
+    if (done == 1){
+        hideSubmit()
+        $.ajax({
+                type:"POST",
+                url: "/update_score",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(count),
+                success: function (result) {
+                    alert(result)
+                },
+                error: function (request, status, error) {
+                    console.log("Error");
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
+                }
+            })
+        
+    }
+
+}
+
+function hideSubmit(){
+    $(".submit-3").hide()
+    $(".submit-3").attr('disabled', true)
+    $("#next_button").show()
+    $("#next_button").attr('disabled', false)
+  }
+
+$(document).ready(function(){
+    $("#next_button").hide()
+    $("#next_button").attr('disabled', true)
+    $(".submit-3").click(function () { 
+        let answers = []
+        let one = document.getElementById("local").value
+        answers.push(one)
+        let errors = false
+        $.each(answers, function(index,value){
+            if (value == ""){
+                errors = true
+            }
+        })
+        //alert(errors)
+        if (errors == false){
+            check(answers)
+        }
+    })
+})
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="description"> Given the map and the information that C train stops at 103rd street station, is C train a express train or a local train? Type your answer. </p>
+                        <ul>
+                            1. <input type="text" id="local" name="box1" placeholder="1" size="28"> <br> <br>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <img class="map_image" src="/static/images/fill_in3.jpg">
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                    <div class="row button_area">
+                            <button class="learnlearn submit-3">submit</button>
+                            <button
+                              onclick="location.href='/quiz/5'"
+                              class="learnlearn next_button"
+                              role="button"
+                              id = "next_button"
+                            >
+                              Next &nbsp <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                          </div>
+                        </div>
+                </div>
+            </div> 
+                <br><br>
+            </div> <br> <br> <br> 
+        </div>
+    </div>
+    <hr class="bottom_line" />
+</div> 
+
+{% endblock %}

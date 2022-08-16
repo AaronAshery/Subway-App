@@ -1,0 +1,114 @@
+{% extends "layout.html" %} {% block content %}
+
+<script>
+
+
+key = ["CentralPark", "Broadway", "ColumbusCircle", "TimesSquare", "PennStation"]
+correct = true
+function check(answers){
+    let a = ""
+    let k = ""
+    let done = 0
+    $.each(answers, function(index,value){
+        a = answers[index].split(" ").join("")
+        a = a.toUpperCase()
+        k = key[index].split(" ").join("")
+        k = k.toUpperCase()
+        if (a != k){
+            correct = false
+            $("#"+key[index]).addClass("wrong-answer")
+        } else{
+            done += 1
+            $("#"+key[index]).removeClass("wrong-answer")
+            $("#"+key[index]).addClass("right-answer")
+        }
+    })
+    if (done == 5){
+        hideSubmit()
+        $.ajax({
+                type:"POST",
+                url: "/update_score",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(count),
+                success: function (result) {
+                    alert(result)
+                },
+                error: function (request, status, error) {
+                    console.log("Error");
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
+                }
+            })
+        
+    }
+
+}
+
+function hideSubmit(){
+    $(".submit-3").hide()
+    $(".submit-3").attr('disabled', true)
+    $("#next_button").show()
+    $("#next_button").attr('disabled', false)
+  }
+
+$(document).ready(function(){
+    $("#next_button").hide()
+    $("#next_button").attr('disabled', true)
+    $(".submit-3").click(function () { 
+        let answers = []
+        let one = document.getElementById("CentralPark").value
+        answers.push(one)
+        let two = document.getElementById("Broadway").value
+        answers.push(two)
+        let three = document.getElementById("ColumbusCircle").value
+        answers.push(three)
+        let four = document.getElementById("TimesSquare").value
+        answers.push(four)
+        let five = document.getElementById("PennStation").value
+        answers.push(five)
+        let errors = false
+        $.each(answers, function(index,value){
+            if (value == ""){
+                errors = true
+            }
+        })
+        //alert(errors)
+        if (errors == false){
+            check(answers)
+        }
+    })
+})
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="description"> Using your knowledge of the subway lines and New York geography. Fill in the blanks with the appropriate location. 5 out of the 7 places on the list are labeled on the map.</p>
+                        <ul>
+                            1. <input type="text" id="CentralPark" name="box1" placeholder="1" size="28"> <br> <br>
+                            2. <input type="text" id="Broadway" name="box2" placeholder="2" size="28"> <br> <br>
+                            3. <input type="text" id="ColumbusCircle" name="box3" placeholder="3" size="28"> <br> <br>
+                            4. <input type="text" id="TimesSquare" name="box4" placeholder="4" size="28"> <br> <br>
+                            5. <input type="text" id="PennStation" name="box5" placeholder="5" size="28">
+                        </ul>
+                    </div>
+                    <img class="map col-6" src="/static/images/fill_in2.jpg">
+                </div>
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <button class="learnlearn submit-3">submit</button>
+                    <button onclick="location.href='/quiz/4'" class="learnlearn next_button" role="button" id ="next_button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i></button>
+                <div>
+            </div>        
+            </div>
+        </div>
+        <br>
+    <hr class="bottom_line" />
+</div> 
+{% endblock %}

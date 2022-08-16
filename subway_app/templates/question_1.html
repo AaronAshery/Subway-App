@@ -1,0 +1,188 @@
+{% extends "layout.html" %} {% block content %}
+
+<head>
+    <script src="https://kit.fontawesome.com/723fc66dde.js" crossorigin="anonymous"></script>
+</head>
+<script>
+
+options = [
+    "Manhattan",
+    "Brooklyn",
+    "Staten Island",
+    "Bronx",
+    "Queens"
+]
+
+correct = [
+
+]
+
+wrong = 0
+
+function make(options){
+    let choices2 = $("#choices")
+    choices2.empty()
+    $.each(options, function (index, value){
+        
+        index = index + 1
+        let s = value + '<br>'
+        $("#choices").append("<div class='box' data-name=" + value + " data-index=" + index + ">" + s + "</div>")
+    })
+    $(".box").hover(function (){
+        this.id = "hovered"
+        $(this).draggable({
+            revert: "invalid",
+            /*start: function(){
+                v = $(this).attr("data-name")
+                if (options.indexOf(v) != -1){
+
+                }
+            }*/
+        })
+    },
+    function (){
+        this.id = ""
+    })
+
+    $("#d1").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Manhattan"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    make(options)
+                } 
+            },
+            accept: function(d){
+                if(d.attr("data-name") == "Manhattan"){
+                    return true;
+                }
+            }
+        }
+    )
+    $("#d2").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Brooklyn"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    make(options)
+                }
+            },
+            accept: function(d){
+                if(d.attr("data-name") == "Brooklyn"){
+                    return true;
+                }
+            }
+        }
+    )
+    $("#d3").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Staten Island"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    make(options)
+                }
+            },
+            accept: function(d){
+                if(d.attr("data-name") == "Staten Island"){
+                    return true;
+                }
+            }
+        }
+    )    
+    $("#d4").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Bronx"){
+                    correct.push(v)
+                    options.splice(i,1)
+                    make(options)
+                }
+            }
+            ,
+            accept: function(d){
+                if(d.attr("data-name") == "Bronx"){
+                    return true;
+                }
+            }
+        }
+    )   
+    $("#d5").droppable(
+        {
+            tolerance: 'touch',
+            drop: function(event, ui){
+                let v = ui.draggable.attr("data-name")
+                let i = ui.draggable.attr("data-index") - 1
+                
+                if (v == "Queens"){
+                    correct.push(v)
+                    choices.splice(i,1)
+                    make(choices)
+                }
+            }
+            ,
+            accept: function(d){
+                if(d.attr("data-name") == "Queens"){
+                    return true;
+                }
+            }
+        }
+    )     
+
+}
+
+$(document).ready(function (){
+    make(options)
+})
+
+</script>
+ 
+
+
+<div class="container rel">
+    <div class="row">
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="description"> Drag the bouroughs to the correct location on the map</p>
+                        <div id=choices>
+                            
+                        </div>
+                    </div>
+                    <img class="map col-6" src="/static/images/map.png">
+                    <div>
+                    <i id="d1" class="fa-solid fa-location-dot dot1"></i>
+                    <i id="d2" class="fa-solid fa-location-dot dot2"></i>
+                    <i id="d3" class="fa-solid fa-location-dot dot3"></i>
+                    <i id="d4" class="fa-solid fa-location-dot dot4"></i>
+                    <i id="d5" class="fa-solid fa-location-dot dot5"></i>
+                    
+                </div> </div> 
+                <br><br>
+            </div> <br> <br> <br> 
+            <button onclick="location.href='/quiz/2'"class="learnlearn nextQPosition" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>   
+       </div>
+    </div>
+</div> 
+
+
+{% endblock %}

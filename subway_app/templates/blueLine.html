@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <p class="title">Blue Line</p>
+    <div class="row"><br>
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <img class="col-6" src="/static/images/blueLine.png">
+                    <div class="col-6" style="background-color:black;">
+                        <p class="description" style="color:white"><b>Popular Destinations</b> </p>   <hr class="lineThin">
+                        <li class="description" style="color:white">Museum of Natural Art History</li>
+                        <li class="description" style="color:white">Columbus Circle</li>
+                        <li class="description" style="color:white">Time Square</li>
+                        <li class="description" style="color:white">Penn Station</li>
+                        <li class="description" style="color:white">Washington Square</li>
+                        <li class="description" style="color:white">World Trade Center</li> 
+                            <p class="description" style="color:white"><b>Starting Route</b></p> <hr class="lineThin"> 
+                            <li class="description" style="color:white">A and C trains start in <b>Upper West Side</b> </li>
+                            <li class="description" style="color:white">E train starts in <b>Midtown</b> </li>
+                            <p class="description" style="color:white"><b>Route Changes</b></p>  <hr class="lineThin"> 
+                            <li class="description" style="color:white"> A, C, E trains are joined on <b>42nd</b> until their split in <b>Chambers Street</b></li>
+                                
+                    </div> 
+                </div> <br><br> <br>
+            </div> <br>
+            <button onclick="location.href='/L7'"class="learnlearn nextPosition orangeLine" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>    
+            <button onclick="location.href='/orangeLine'"class="learnlearn backPosition orangeLine" role="button">Back &nbsp <i class="fa-solid fa-arrow-left-long"></i> </button>  
+        </div>
+    </div><hr class="hrthick"><br> 
+    <div class="container">
+        <div class="row" >
+            <div class= "col-3 col-sm col-md"> <button onclick="location.href='/bouroughs'" class= "blue button-53" role="button"> Boroughs </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/street'" class= "red button-53" role="button"> Manhattan </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/express'" class= "yellow button-53" role="button"> Local/Express </button></div>
+            <div class= "col-3 col-sm col-md"><button onclick="location.href='/line'" class= "green button-53" role="button"> Line</button></div>
+        </div>
+    </div>
+</div> 
+    </div> 
+        </div>   
+        
+        
+{% endblock %}

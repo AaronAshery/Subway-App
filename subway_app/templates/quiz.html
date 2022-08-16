@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {% block content %}
+
+ <div class="container">
+    <div class="row">
+        <div class="col center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="description"> {{question.question}} </p>
+                        <ul>
+                            <li class="description">{{question.choices}}</li>
+                        </ul>
+                    </div>
+                    <img class="map col-6" src="/static/images/{{question.img}}">
+                </div> </div> 
+                <br><br>
+            </div> <br> <br> <br> 
+            <button onclick="location.href='/quiz/{{question.next}}'"class="learnlearn nextQPosition" role="button">Next &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>   
+       </div>
+    </div>
+</div> 
+
+{% endblock %}

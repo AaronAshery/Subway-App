@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+
+</script>
+
+    <div class="form">
+    </div>
+    <div id="items"class="form2">
+        <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col center">
+                            <img class="quote" src="/static/images/welcome.png">
+                            <button onclick="location.href='/quiz_home'"class="learn green learnPosition" role="button">Test &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>
+                            <button onclick="location.href='/learn'"class="learn green testPosition" role="button">Learn &nbsp <i class="fa-solid fa-arrow-right-long"></i> </button>      
+      
+                        </div>                        
+
+                    </div><hr><br> 
+                    <!-- <div class="container">
+                        <div class="row" >
+                            <div class= "col-3 col-sm col-md"> <button class= "blue button-53" role="button"> Bouroughs </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "red button-53" role="button"> StreetSystem </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "yellow button-53" role="button"> Local/Express </button></div>
+                            <div class= "col-3 col-sm col-md"><button class= "green button-53" role="button"> Line</button></div>
+                        </div>
+                    </div> -->
+                </div> 
+                
+                    <div class="row">
+                        <div class="col topRated center">
+                            <!-- <img class="topRated" src="/static/images/topRated.png"> -->
+                        </div>
+                    </div><br><br>
+                    <!-- <div id="row" class="row">
+                        {% for datarow in topDishes %}
+                        <div class="col-4 col-md col-sm">
+                            <div class="card position" style="width: 20rem;">
+                                <img class="imgSmall card-img-top" src="{{ datarow.image }}" alt="{{ datarow.name }} Card image cap">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ datarow.id }}. {{ datarow.name }}</h5>
+                                <p class="card-text">{{ datarow.description }}</p>
+                                <form method="GET" action="/view/{{ datarow.id }}">
+                                <button  type="submit" class="btn btn1 btn-primary ">Read more</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                    </div> <br><hr> -->
+                    <br>
+                    <!-- <div class="row">
+                            <div class="col suggestion ">
+                                <img class="suggestion" src="/static/images/title2.png"></img>
+                            </div>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="col description">
+                            <form method="GET" action="/view/{{id}}">
+                                <button id="random" class="randomButton col-md col-sm"> Find a Dish  <i class="fa-solid fa-shuffle"></i></button>
+                            </form>
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div> <br><hr><br>
+                    <div class="container">
+                        <div class="row" >
+                            <a href="/meal/Dinner">
+                            <div class="col-3 col-sm col-md imageContainer"> <img class="typeImage" src="/static/images/dinner.jpeg">
+                                <div class="overlay">
+                                    <div class="imageText">Dinner</div>
+                                  </div>
+                            </div>
+                            </a>
+                            <a href="/meal/Breakfast">
+                            <div class="col-3 col-sm col-md imageContainer"> <img class="typeImage" src="/static/images/breakfast.png">
+                                <div class="overlay">
+                                    <div class="imageText">Breakfast</div>
+                                  </div>
+                            </div>
+                            </a>
+                            <a href="/meal/Healthy">
+                            <div class="col-3 col-sm col-md imageContainer"> <img class="typeImage" src="/static/images/Healthy.jpeg">
+                                <div class="overlay">
+                                    <div class="imageText">Healthy</div>
+                                  </div>
+                            </div>
+                            </a>
+                            <a href="/meal/Dessert">
+                            <div class="col-3 col-sm col-md imageContainer"> <img class="typeImage" src="/static/images/Dessert.jpeg">
+                                <div class="overlay">
+                                    <div class="imageText">Dessert</div>
+                                  </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+                 -->
+       
+
+    </div>
+{% endblock %}
+

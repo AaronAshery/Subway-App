@@ -1,0 +1,126 @@
+{% extends "layout.html" %} {% block content %}
+<script>
+  let question = {{question|tojson}}
+  let choices = question.choices
+  var done = false;
+
+      let answer_points = function (count) {
+    $.ajax({
+      type: "POST",
+      url: "/update_score",
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(count),
+      success: function (result) {
+        console.log(result);
+      },
+      error: function (request, status, error) {
+        console.log("Error");
+        console.log(request);
+        console.log(status);
+        console.log(error);
+      },
+    });
+  };
+
+  function buttonLogic(done){
+    // submit is visible until question correct
+        if(done == false){
+            $(".next_button").hide()
+            $(".next_button").attr('disabled', true)
+        }
+  }
+  function submitClicked(){
+    // give answer feedback
+    let answer = $('input[name="choice"]:checked').val();
+      // check to see if that is the correct answer
+      if(answer != question.answer['1']){
+           $('#answer_choice1').addClass("wrong-multiple_c")
+           answer_points(-1)
+      }else{
+          $('#answer_choice2').addClass("correct-multiple_c")
+          $('#answer_choice1').removeClass("wrong-multiple_c")
+          done = true
+          hideSubmit(done)
+      }
+  }
+
+  function hideSubmit(done){
+      if(done == true){
+        $(".submit").hide()
+        $(".submit").attr('disabled', true)
+        $(".next_button").show()
+        $(".next_button").attr('disabled', false)
+      }
+  }
+
+  $(document).ready(function() {
+      buttonLogic(done)
+        // when submit is clicked give feedback and button should change
+        $('.submit').click(function (){
+            submitClicked()
+            buttonLogic(done)
+            hideSubmit(done)
+        })
+
+      // when submit button is clicked
+      $('.submit').click(function(){
+          submitClicked()
+    });
+  	})
+</script>
+
+<div class="container q_content">
+  <div class="row slide_view">
+    <div class="col-6 q_and_a">
+      <div class="row question_text">
+        <p class="description">{{question.question}}</p>
+      </div>
+      <div class="row">
+        <div id="answer_choice1">
+          <input
+            name="choice"
+            class="mult-ans"
+            type="radio"
+            id="m1"
+            value="{{question.choices[0]}}"
+          />
+          <label class="description_ans" for="m1"
+            >{{ question.choices[0]}}</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div id="answer_choice2">
+          <input
+            name="choice"
+            class="mult-ans"
+            type="radio"
+            id="m2"
+            value="{{question.choices[1]}}"
+          />
+          <label class="description_ans" for="m2"
+            >{{ question.choices[1]}}</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-6 q_and_a">
+      <img class="map_image" src="/static/images/{{question.img}}" />
+    </div>
+  </div>
+  <div class="row button_area">
+    <button class="submit learnlearn">submit</button>
+    <button
+      onclick="location.href='/quiz/{{question.next}}'"
+      class="learnlearn next_button"
+      role="button"
+    >
+      Next &nbsp
+      <i class="fa-solid fa-arrow-right-long"></i>
+    </button>
+  </div>
+  <hr class="bottom_line" />
+</div>
+
+{% endblock %}
